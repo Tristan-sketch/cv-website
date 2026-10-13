@@ -11,10 +11,10 @@ app.jinja_env.globals["pixel"] = pixel_svg
 # The menu on the device screen. Each entry links to a section on the page.
 MENU = [
     {"id": "about", "label": "Über mich", "icon": "user"},
-    {"id": "skills", "label": "Skills", "icon": "terminal"},
     {"id": "experience", "label": "Erfahrung", "icon": "briefcase"},
-    {"id": "projects", "label": "Projekte", "icon": "star"},
     {"id": "education", "label": "Ausbildung", "icon": "cap"},
+    {"id": "skills", "label": "Skills", "icon": "terminal"},
+    {"id": "projects", "label": "Projekte", "icon": "star"},
     {"id": "contact", "label": "Kontakt", "icon": "mail"},
 ]
 
@@ -29,7 +29,7 @@ def index():
         experience=cv_data.EXPERIENCE,
         projects=cv_data.PROJECTS,
         education=cv_data.EDUCATION,
-        fun_facts=cv_data.FUN_FACTS,
+        quick_facts=cv_data.QUICK_FACTS,
         contact=cv_data.CONTACT,
         year=date.today().year,
     )

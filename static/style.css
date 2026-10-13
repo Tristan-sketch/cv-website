@@ -560,59 +560,51 @@ main {
   margin-bottom: 0;
 }
 
-.fun-facts ul {
+.quick-facts dl {
   margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
-.fun-facts li {
-  padding: 9px 0;
+.quick-facts dl > div {
+  padding: 10px 0;
   border-bottom: 1px dashed var(--line);
 }
 
-.fun-facts li:last-child {
+.quick-facts dl > div:last-child {
   border-bottom: 0;
+  padding-bottom: 0;
 }
 
-.fun-facts li::before {
-  content: "▸ ";
+.quick-facts dt {
   color: var(--orange);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.quick-facts dd {
+  margin: 2px 0 0;
 }
 
 /* Skills */
 .skills {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
 }
 
-.skill {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.tags-lg {
+  gap: 8px;
 }
 
-.skill-name {
-  font-weight: 500;
+.tags-lg li {
+  padding: 6px 14px;
+  color: var(--text);
+  font-size: 14px;
 }
 
-.skill-level {
-  display: flex;
-  gap: 4px;
-}
-
-.skill-level i {
-  width: 22px;
-  height: 8px;
-  background: var(--line);
-}
-
-.skill-level i.on {
-  background: var(--orange);
+.skill-group:hover .tags-lg li {
+  border-color: rgba(255, 130, 0, 0.35);
 }
 
 /* Experience and education */

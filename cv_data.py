@@ -1,42 +1,85 @@
 """All content of the CV website.
 
-Edit this file to change what the website shows. Values in [square brackets]
-are placeholders that still need your real information.
+Edit this file to change what the website shows.
 """
 
 PROFILE = {
     "name": "Tristan Hartenstein",
     "short_name": "Tristan",
-    "role": "Web Developer",
-    "location": "[Stadt, Land]",
-    "tagline": "Ich baue Web-Apps von der Datenbank bis zum Pixel.",
+    "role": "Dualer Student Wirtschaftsprüfung",
+    "screen_role": "Audit @ Deloitte",
+    "location": "Großraum München",
+    "tagline": "Angehender Wirtschaftsprüfer mit einem Faible für Technik.",
     "about": [
-        "Hi! Ich bin Tristan. Programmieren habe ich während meines Praktikums bei Titanom "
-        "richtig angefangen – mit einer kompletten Blog-Plattform inklusive Datenbank und Login.",
-        "[Ein, zwei Sätze über dich: Was dich antreibt, was du lernen willst, wonach du suchst.]",
+        "Ich studiere dual Wirtschaftsprüfung (RSW) an der DHBW. Meine Praxisphasen "
+        "verbringe ich bei Deloitte im Bereich Audit & Assurance, Industry.",
+        "Besonders interessieren mich Wirtschaftsprüfung, Unternehmenssteuerrecht "
+        "und Transaktionen.",
+        "Vor dem Studium war ich im IT-Praktikum bei Titanom Technologies und habe dort "
+        "meine erste eigene Web-App gebaut. Die Neugier auf Technik ist geblieben – "
+        "deshalb ist auch dieser Lebenslauf eine kleine App.",
     ],
 }
 
-# Shown as "apps" in a grid. level: 1 to 5.
+# Short facts shown next to the "about" text.
+QUICK_FACTS = [
+    {"label": "Standort", "value": "Großraum München"},
+    {"label": "Studium", "value": "B.Sc. Wirtschaftsprüfung (RSW), DHBW"},
+    {"label": "Deltaprüfung", "value": "988 / 1000 Punkte"},
+    {"label": "Sprachen", "value": "Deutsch (Muttersprache), Englisch (verhandlungssicher)"},
+]
+
 SKILLS = [
-    {"name": "TypeScript", "level": 3},
-    {"name": "React / Next.js", "level": 3},
-    {"name": "Tailwind CSS", "level": 3},
-    {"name": "SQL & Datenbanken", "level": 2},
-    {"name": "Python", "level": 2},
-    {"name": "Git & GitHub", "level": 2},
+    {
+        "group": "Fachlich",
+        "items": [
+            "Rechnungslegungsstandards",
+            "IFRS",
+            "Steuern",
+            "Wirtschaftsprüfung",
+        ],
+    },
+    {
+        "group": "Tech",
+        "items": [
+            "TypeScript",
+            "React / Next.js",
+            "Tailwind CSS",
+            "SQL",
+            "Python",
+            "Git & GitHub",
+        ],
+    },
 ]
 
 EXPERIENCE = [
     {
-        "title": "Praktikum Softwareentwicklung",
-        "company": "Titanom",
-        "period": "[Monat Jahr] – [Monat Jahr]",
+        "title": "Junior Staff – Audit Industry",
+        "company": "Deloitte",
+        "period": "Okt. 2025 – heute",
+        "location": "Großraum München",
+        "points": [
+            "Praxisphasen des dualen Studiums Wirtschaftsprüfung (RSW)",
+            "Audit & Assurance im Bereich Industry",
+        ],
+    },
+    {
+        "title": "Praktikum Informationstechnologie",
+        "company": "Titanom Technologies",
+        "period": "März 2024 – Juli 2024",
+        "location": "Großraum München",
         "points": [
             "Eigene Blog-Plattform mit Next.js, TypeScript und Tailwind CSS entwickelt",
             "Datenbank mit Drizzle ORM und PostgreSQL angebunden, inklusive Migrationen",
             "Benutzer-Login, Kommentare und Kategorien umgesetzt",
         ],
+    },
+    {
+        "title": "Praktikum Produktion & Marketing",
+        "company": "additive elements GmbH",
+        "period": "Sept. 2023 – Feb. 2024",
+        "location": "Großraum München",
+        "points": [],
     },
 ]
 
@@ -44,7 +87,7 @@ PROJECTS = [
     {
         "name": "BlogPost",
         "description": "Blog-Plattform mit Accounts, Kategorien und Kommentaren. "
-        "Entstanden im Praktikum, später auf eigenes Login und SQLite umgebaut.",
+        "Entstanden im Praktikum bei Titanom, später auf eigenes Login und SQLite umgebaut.",
         "stack": ["Next.js", "TypeScript", "Tailwind", "SQLite"],
         "link": "https://github.com/Tristan-sketch/BlogPost",
     },
@@ -59,21 +102,23 @@ PROJECTS = [
 
 EDUCATION = [
     {
-        "title": "[Abschluss, z. B. Mittlere Reife / Abitur]",
-        "school": "[Name der Schule]",
-        "period": "[Jahr] – [Jahr]",
+        "title": "Bachelor of Science – Wirtschaftsprüfung (RSW)",
+        "school": "Duale Hochschule Baden-Württemberg (DHBW)",
+        "period": "Okt. 2025 – Okt. 2028",
+    },
+    {
+        "title": "Fachabitur – Wirtschaft und Verwaltung",
+        "school": "Staatliche Fachoberschule Germering",
+        "period": "Sept. 2023 – Juli 2025",
     },
 ]
 
-# Small facts that give the page some personality.
-FUN_FACTS = [
-    "Erste Website gebaut: [Jahr]",
-    "[Hobby, z. B. Gaming, Sport, Musik]",
-    "[Etwas Überraschendes über dich]",
-]
-
 CONTACT = [
+    {"label": "E-Mail", "value": "...", "url": "mailto:..."},
+    {
+        "label": "LinkedIn",
+        "value": "tristan-hartenstein",
+        "url": "https://www.linkedin.com/in/tristan-hartenstein-7b6a43306",
+    },
     {"label": "GitHub", "value": "Tristan-sketch", "url": "https://github.com/Tristan-sketch"},
-    {"label": "Instagram", "value": "@tr_istan2034", "url": "https://www.instagram.com/tr_istan2034/"},
-    {"label": "E-Mail", "value": "[deine@email.de]", "url": "mailto:[deine@email.de]"},
 ]

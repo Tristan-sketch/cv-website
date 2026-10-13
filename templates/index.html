@@ -24,7 +24,7 @@
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contact">Kontakt aufnehmen</a>
-        <a class="btn" href="#projects">Projekte ansehen</a>
+        <a class="btn" href="#experience">Erfahrung ansehen</a>
       </div>
     </div>
 
@@ -50,7 +50,7 @@
             <div>
               <p class="screen-hello">Hi, ich bin</p>
               <p class="screen-name">{{ profile.short_name }}</p>
-              <p class="screen-role"><span id="typed" data-text="{{ profile.role }}">{{ profile.role }}</span><span class="cursor">_</span></p>
+              <p class="screen-role"><span id="typed" data-text="{{ profile.screen_role }}">{{ profile.screen_role }}</span><span class="cursor">_</span></p>
             </div>
           </div>
 
@@ -93,29 +93,18 @@
           <p>{{ paragraph }}</p>
           {% endfor %}
         </div>
-        <div class="card fun-facts">
-          <p class="card-label">Fun Facts</p>
-          <ul>
-            {% for fact in fun_facts %}
-            <li>{{ fact }}</li>
+        <div class="card quick-facts">
+          <p class="card-label">Auf einen Blick</p>
+          <dl>
+            {% for fact in quick_facts %}
+            <div>
+              <dt>{{ fact.label }}</dt>
+              <dd>{{ fact.value }}</dd>
+            </div>
             {% endfor %}
-          </ul>
+          </dl>
         </div>
       </div>
-    </section>
-
-    <section id="skills" class="section">
-      <h2 class="section-title">{{ pixel('terminal', 3) }} Skills</h2>
-      <ul class="skills">
-        {% for skill in skills %}
-        <li class="card skill">
-          <span class="skill-name">{{ skill.name }}</span>
-          <span class="skill-level" aria-label="Level {{ skill.level }} von 5">
-            {% for i in range(5) %}<i class="{{ 'on' if i < skill.level }}"></i>{% endfor %}
-          </span>
-        </li>
-        {% endfor %}
-      </ul>
     </section>
 
     <section id="experience" class="section">
@@ -127,14 +116,48 @@
             <h3>{{ job.title }} <span class="accent">@ {{ job.company }}</span></h3>
             <span class="period">{{ job.period }}</span>
           </div>
+          <p class="muted">{{ job.location }}</p>
+          {% if job.points %}
           <ul class="points">
             {% for point in job.points %}
             <li>{{ point }}</li>
             {% endfor %}
           </ul>
+          {% endif %}
         </li>
         {% endfor %}
       </ol>
+    </section>
+
+    <section id="education" class="section">
+      <h2 class="section-title">{{ pixel('cap', 3) }} Ausbildung</h2>
+      <ol class="timeline">
+        {% for entry in education %}
+        <li class="card timeline-item">
+          <div class="timeline-head">
+            <h3>{{ entry.title }}</h3>
+            <span class="period">{{ entry.period }}</span>
+          </div>
+          <p class="muted">{{ entry.school }}</p>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <section id="skills" class="section">
+      <h2 class="section-title">{{ pixel('terminal', 3) }} Skills</h2>
+      <div class="skills">
+        {% for group in skills %}
+        <div class="card skill-group">
+          <p class="card-label">{{ group.group }}</p>
+          <ul class="tags tags-lg">
+            {% for item in group["items"] %}
+            <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
     </section>
 
     <section id="projects" class="section">
@@ -153,21 +176,6 @@
         </article>
         {% endfor %}
       </div>
-    </section>
-
-    <section id="education" class="section">
-      <h2 class="section-title">{{ pixel('cap', 3) }} Ausbildung</h2>
-      <ol class="timeline">
-        {% for entry in education %}
-        <li class="card timeline-item">
-          <div class="timeline-head">
-            <h3>{{ entry.title }}</h3>
-            <span class="period">{{ entry.period }}</span>
-          </div>
-          <p class="muted">{{ entry.school }}</p>
-        </li>
-        {% endfor %}
-      </ol>
     </section>
 
     <section id="contact" class="section">
