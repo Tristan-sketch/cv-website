@@ -1,3 +1,25 @@
+/* ---------- Fonts (served locally, no requests to Google) ---------- */
+@font-face {
+  font-family: "Silkscreen";
+  src: url("fonts/silkscreen.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("fonts/space-grotesk.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("fonts/jetbrains-mono.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
 /* ---------- Tokens ---------- */
 :root {
   --bg: #0b0b0c;
@@ -122,17 +144,47 @@ a {
   color: #111;
 }
 
-/* ---------- Hero ---------- */
-.hero {
+/* ---------- Page layout ----------
+   Small screens: hero, device, sections stacked.
+   Wide screens: the device sits in its own column and follows the reader. */
+.layout {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  align-items: center;
-  gap: 48px;
-  max-width: 1080px;
-  min-height: 88vh;
+  grid-template-areas: "hero" "device" "main";
+  gap: 40px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 48px 24px 0;
 }
+
+.hero { grid-area: hero; }
+.device-col { grid-area: device; }
+.layout > main { grid-area: main; }
+
+@media (min-width: 1100px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 440px;
+    grid-template-areas: "hero device" "main device";
+    column-gap: 56px;
+  }
+
+  .hero {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .device-col {
+    position: relative;
+  }
+
+  .device-col .device {
+    position: sticky;
+    top: 32px;
+  }
+}
+
+/* ---------- Hero ---------- */
 
 .eyebrow {
   margin: 0 0 12px;
@@ -190,8 +242,8 @@ a {
 
 /* ---------- Device ---------- */
 .device {
-  justify-self: center;
-  width: min(100%, 470px);
+  margin: 0 auto;
+  width: min(100%, 440px);
   padding: 16px 18px 20px;
   border-radius: 30px;
   background: linear-gradient(160deg, var(--plastic), var(--plastic-dark));
@@ -206,6 +258,17 @@ a {
 .device:hover,
 .device:focus-within {
   transform: rotate(0deg);
+}
+
+.device:focus-within {
+  box-shadow:
+    0 0 0 3px var(--orange),
+    0 40px 80px rgba(0, 0, 0, 0.55),
+    inset 0 -5px 0 rgba(0, 0, 0, 0.08);
+}
+
+.device:focus {
+  outline: none;
 }
 
 .device-top {
@@ -287,28 +350,118 @@ kbd {
   font-size: 10px;
 }
 
+/* The battery shows how much of the study programme is done */
 .battery {
-  display: inline-flex;
-  gap: 1px;
+  position: relative;
+  width: 26px;
+  height: 12px;
+  padding: 1px;
+  border: 2px solid currentColor;
+  cursor: help;
+}
+
+.battery::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: -5px;
+  width: 3px;
+  height: 4px;
+  background: currentColor;
+}
+
+.battery i {
+  display: block;
+  height: 100%;
+  background: currentColor;
+}
+
+/* All screen views share one grid cell so switching never changes the height */
+.screen-views {
+  display: grid;
+  margin: 12px 0 10px;
+}
+
+.screen-view {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s steps(3);
+}
+
+.screen-view.is-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.readout {
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.readout-title {
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+
+.readout-rows {
+  margin: 0;
+}
+
+.readout-rows div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px dashed rgba(28, 15, 0, 0.4);
+}
+
+.readout-rows dd {
+  margin: 0;
+}
+
+.readout-timeline {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.readout-timeline li {
+  flex: 1;
+  padding-top: 6px;
+  border-top: 3px solid currentColor;
+}
+
+.readout-timeline span {
+  display: block;
+  font-size: 12px;
+}
+
+.readout-bar {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.readout-bar .bar {
+  height: 10px;
   padding: 1px;
   border: 2px solid currentColor;
 }
 
-.battery i {
-  width: 4px;
-  height: 6px;
+.readout-bar .bar i {
+  display: block;
+  height: 100%;
   background: currentColor;
-}
-
-.battery i:last-child {
-  opacity: 0.25;
 }
 
 .screen-intro {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 12px 0 10px;
 }
 
 .avatar {
@@ -381,11 +534,17 @@ kbd {
   display: flex;
   align-items: center;
   gap: 6px;
+  width: 100%;
   padding: 4px 6px;
+  border: 0;
   border-radius: 4px;
+  background: none;
   color: inherit;
+  font: inherit;
   font-size: 10px;
+  text-align: left;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .menu-item.is-selected,
@@ -490,9 +649,46 @@ kbd {
 
 /* ---------- Sections ---------- */
 main {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 24px;
+  min-width: 0;
+}
+
+.layout > main > .section:first-child {
+  margin-top: 0;
+}
+
+.section-intro {
+  margin: -8px 0 20px;
+  color: var(--muted);
+}
+
+/* Small "B1" style reference next to a claim, linking to the audit trail */
+.ref-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 4px;
+  padding: 1px 6px;
+  border: 1px solid rgba(255, 130, 0, 0.45);
+  border-radius: 4px;
+  color: var(--orange);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.ref-mark .pixel,
+.section-intro .pixel {
+  width: 9px;
+  height: 7px;
+}
+
+.ref-mark:hover {
+  background: var(--orange);
+  color: #111;
 }
 
 .section {
@@ -586,6 +782,11 @@ main {
   margin: 2px 0 0;
 }
 
+.quick-facts .fact-note {
+  color: var(--muted);
+  font-size: 14px;
+}
+
 /* Skills */
 .skills {
   display: grid;
@@ -593,18 +794,109 @@ main {
   gap: 16px;
 }
 
-.tags-lg {
-  gap: 8px;
+.skill-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.tags-lg li {
-  padding: 6px 14px;
-  color: var(--text);
-  font-size: 14px;
+.skill-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 12px;
+  padding: 9px 0;
+  border-bottom: 1px dashed var(--line);
 }
 
-.skill-group:hover .tags-lg li {
-  border-color: rgba(255, 130, 0, 0.35);
+.skill-list li:last-child {
+  border-bottom: 0;
+}
+
+.skill-evidence {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.skill-evidence::before {
+  content: "↳ ";
+  color: var(--orange);
+}
+
+/* Audit trail and glossary */
+.audit {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.audit-list {
+  margin: 0;
+  padding: 8px 22px;
+  list-style: none;
+}
+
+.audit-list li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 2px 12px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line);
+  scroll-margin-top: 24px;
+}
+
+.audit-list li:last-child {
+  border-bottom: 0;
+}
+
+.audit-list li:target {
+  margin: 0 -12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255, 130, 0, 0.12);
+}
+
+.audit-ref {
+  grid-row: span 2;
+  color: var(--orange);
+  font-family: var(--pixel);
+}
+
+.audit-source {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.audit-source a {
+  color: var(--orange);
+}
+
+.glossary dl,
+.glossary dd {
+  margin: 0;
+}
+
+.glossary div {
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.glossary div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.glossary dt {
+  color: var(--orange);
+  font-family: var(--pixel);
+}
+
+.glossary dd {
+  color: var(--muted);
+  font-size: 15px;
 }
 
 /* Experience and education */
@@ -712,6 +1004,12 @@ main {
   text-decoration: underline;
 }
 
+.link-muted,
+.link-muted:hover {
+  color: var(--muted);
+  text-decoration: none;
+}
+
 /* Contact: styled like a menu on the device */
 .contact {
   display: grid;
@@ -768,9 +1066,9 @@ main {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 8px;
-  max-width: 1080px;
+  max-width: 1152px;
   margin: 96px auto 0;
-  padding: 24px;
+  padding: 24px 0;
   border-top: 1px solid var(--line);
   font-family: var(--mono);
   font-size: 13px;
@@ -778,6 +1076,204 @@ main {
 
 .footer p {
   margin: 0;
+}
+
+.footer a {
+  color: var(--orange);
+}
+
+.print-only {
+  display: none;
+}
+
+/* ---------- Privacy page ---------- */
+.legal {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 0;
+}
+
+.legal .section {
+  margin-top: 40px;
+}
+
+.legal .section-title::before {
+  content: none;
+}
+
+.legal-text h2 {
+  margin: 24px 0 6px;
+  color: var(--orange);
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legal-text h2:first-child {
+  margin-top: 0;
+}
+
+.legal-text p {
+  margin: 0;
+}
+
+/* ---------- Print: a plain one-column CV on white paper ---------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 16mm 14mm;
+  }
+
+  :root {
+    --text: #111;
+    --muted: #555;
+    --line: #ccc;
+    --orange: #c25e00;
+  }
+
+  body {
+    background: #fff;
+    color: #111;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  .skip-link,
+  .device-col,
+  .hero-actions,
+  .hero-meta,
+  .hero-tagline,
+  .eyebrow,
+  .section-intro,
+  .glossary,
+  #contact,
+  .link,
+  .tags {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  .layout {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  .hero {
+    min-height: 0;
+    padding-bottom: 8pt;
+    border-bottom: 2pt solid var(--orange);
+  }
+
+  .hero-name {
+    font-size: 24pt;
+  }
+
+  .print-summary {
+    margin: 6pt 0 2pt;
+  }
+
+  .print-contact {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 9pt;
+  }
+
+  .section {
+    margin-top: 14pt;
+    break-inside: avoid-page;
+  }
+
+  .section-title {
+    margin-bottom: 6pt;
+    padding-bottom: 3pt;
+    font-size: 12pt;
+  }
+
+  .section-title .pixel {
+    display: none;
+  }
+
+  .card {
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .about,
+  .skills,
+  .projects,
+  .audit {
+    display: block;
+  }
+
+  .about-text p,
+  .timeline-head h3,
+  .project h3 {
+    margin-bottom: 4pt;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .quick-facts {
+    margin-top: 6pt;
+  }
+
+  .quick-facts dl > div {
+    padding: 2pt 0;
+    border: 0;
+  }
+
+  .timeline {
+    gap: 6pt;
+  }
+
+  .timeline-item {
+    padding-left: 8pt;
+    border-left-width: 2pt;
+    break-inside: avoid;
+  }
+
+  .period {
+    padding: 0;
+    background: none;
+  }
+
+  .skill-list li,
+  .audit-list li {
+    padding: 2pt 0;
+    border: 0;
+  }
+
+  .audit-list {
+    padding: 0;
+    font-size: 8.5pt;
+  }
+
+  .ref-mark {
+    border: 0;
+    padding: 0;
+  }
+
+  .ref-mark .pixel {
+    display: none;
+  }
+
+  .footer {
+    margin-top: 16pt;
+    padding: 6pt 0 0;
+    font-size: 8pt;
+  }
+
+  .footer a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 /* ---------- Animations ---------- */
@@ -804,18 +1300,20 @@ main {
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 860px) {
-  .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    gap: 40px;
+@media (max-width: 1099px) {
+  .footer {
+    margin-left: 24px;
+    margin-right: 24px;
   }
+}
 
+@media (max-width: 860px) {
   .device {
     transform: none;
   }
 
-  .about {
+  .about,
+  .audit {
     grid-template-columns: 1fr;
   }
 }
@@ -825,10 +1323,14 @@ main {
     font-size: 16px;
   }
 
-  .hero,
-  main {
+  .layout {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .footer {
+    margin-left: 16px;
+    margin-right: 16px;
   }
 
   .device-body {

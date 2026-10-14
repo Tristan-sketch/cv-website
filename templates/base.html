@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ profile.name }} – Lebenslauf{% endblock %}</title>
+  <meta name="description" content="{{ profile.summary }}">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="{{ profile.name }} – Lebenslauf">
+  <meta property="og:description" content="{{ profile.summary }}">
+  {% if site_url %}
+  <meta property="og:url" content="{{ site_url }}/">
+  <meta property="og:image" content="{{ site_url }}/static/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  {% endif %}
+  <link rel="icon" href="static/favicon.png" type="image/png">
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  {% block body %}{% endblock %}
+
+  <footer class="footer">
+    <p>© {{ year }} {{ profile.name }} · Stand: {{ as_of }}</p>
+    <p class="muted">
+      <a href="datenschutz.html">Datenschutz{% if impressum %} &amp; Impressum{% endif %}</a>
+      · Gebaut mit Python &amp; Flask
+    </p>
+    {% if site_url %}<p class="print-only">{{ site_url }}</p>{% endif %}
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

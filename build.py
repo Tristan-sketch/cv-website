@@ -20,11 +20,13 @@ def main():
         shutil.rmtree(BUILD)
     shutil.copytree(ROOT / "static", BUILD / "static")
 
+    pages = {"/": "index.html", "/datenschutz.html": "datenschutz.html"}
     with app.test_client() as client:
-        response = client.get("/")
-        if response.status_code != 200:
-            raise SystemExit(f"Rendering failed with status {response.status_code}")
-        (BUILD / "index.html").write_bytes(response.data)
+        for route, filename in pages.items():
+            response = client.get(route)
+            if response.status_code != 200:
+                raise SystemExit(f"Rendering {route} failed with status {response.status_code}")
+            (BUILD / filename).write_bytes(response.data)
 
     print(f"Website built into {BUILD}")
 
