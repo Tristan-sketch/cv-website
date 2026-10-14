@@ -6,14 +6,14 @@ source in SOURCES, which the site lists as an audit trail ("Prüfpfad").
 
 # Full URL of the published site, e.g. "https://tristan-sketch.github.io/cv-website".
 # Needed for link previews (Open Graph image) and the print footer. None until hosted.
-SITE_URL = None
+SITE_URL = "https://tristan-sketch.github.io/cv-website"
 
 # Legal notice. Leave as None until you decide whether the site needs one;
 # never fill in an address you do not want to publish.
 IMPRESSUM = None  # e.g. {"name": "...", "address": ["Straße 1", "12345 Ort"], "email": "..."}
 
 # Name of the hosting provider for the privacy page, e.g. "GitHub Pages (GitHub Inc.)".
-HOSTING_PROVIDER = None
+HOSTING_PROVIDER = "GitHub Pages (GitHub Inc., USA)"
 
 # Contact for the privacy page. Without an e-mail address the page points to LinkedIn.
 PRIVACY_CONTACT = {"name": "Tristan Hartenstein", "email": None}
@@ -24,12 +24,12 @@ SOURCES = {
         "url": "https://www.linkedin.com/in/tristan-hartenstein-7b6a43306",
     },
     "code": {
-        "label": "Quellcode auf GitHub (Repository privat, Einsicht auf Anfrage)",
-        "url": None,
+        "label": "Quellcode auf GitHub",
+        "url": "https://github.com/Tristan-sketch",
     },
     "site": {
         "label": "Diese Website selbst",
-        "url": None,
+        "url": "https://github.com/Tristan-sketch/cv-website",
     },
 }
 
@@ -182,7 +182,6 @@ EDUCATION = [
 ]
 
 CONTACT = [
-    {"label": "E-Mail", "value": "...", "url": "mailto:..."},
     {
         "label": "LinkedIn",
         "value": "tristan-hartenstein",
