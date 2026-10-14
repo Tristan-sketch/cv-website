@@ -64,4 +64,4 @@ static/         # CSS, local fonts (OFL), images and a small script for the devi
 
 ## License
 
-The code is released under the [MIT License](LICENSE). The personal content of the CV is not licensed for reuse. Fonts are under the SIL Open Font License.
+The code is released under the [MIT License](LICENSE). The personal content of the CV is not licensed for reuse, and the fonts are under the SIL Open Font License; see [NOTICE](NOTICE).
