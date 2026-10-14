@@ -21,7 +21,11 @@
     <h1 class="section-title">Datenschutz</h1>
     <div class="card legal-text">
       <h2>Verantwortlich</h2>
-      <p>{{ privacy_contact.name }}, E-Mail: <a href="mailto:{{ privacy_contact.email }}">{{ privacy_contact.email }}</a></p>
+      <p>
+        {{ privacy_contact.name }},
+        {% if privacy_contact.email %}E-Mail: <a href="mailto:{{ privacy_contact.email }}">{{ privacy_contact.email }}</a>
+        {% else %}erreichbar über <a href="{{ contact | selectattr('label', 'equalto', 'LinkedIn') | map(attribute='url') | first }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>{% endif %}
+      </p>
 
       <h2>Kurz gesagt</h2>
       <p>
@@ -38,9 +42,9 @@
         Sicherheit zu gewährleisten (Art. 6 Abs. 1 lit. f DSGVO).
       </p>
 
-      <h2>Kontakt per E-Mail</h2>
+      <h2>Kontaktaufnahme</h2>
       <p>
-        Wenn Sie mir eine E-Mail schreiben, verwende ich Ihre Angaben nur, um Ihre Anfrage
+        Wenn Sie mich kontaktieren, verwende ich Ihre Angaben nur, um Ihre Anfrage
         zu beantworten (Art. 6 Abs. 1 lit. b und f DSGVO).
       </p>
 

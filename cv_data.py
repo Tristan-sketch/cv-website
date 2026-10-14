@@ -15,8 +15,8 @@ IMPRESSUM = None  # e.g. {"name": "...", "address": ["Straße 1", "12345 Ort"], 
 # Name of the hosting provider for the privacy page, e.g. "GitHub Pages (GitHub Inc.)".
 HOSTING_PROVIDER = None
 
-# Contact for the privacy page.
-PRIVACY_CONTACT = {"name": "Tristan Hartenstein", "email": "..."}
+# Contact for the privacy page. Without an e-mail address the page points to LinkedIn.
+PRIVACY_CONTACT = {"name": "Tristan Hartenstein", "email": None}
 
 SOURCES = {
     "linkedin": {
